@@ -6,7 +6,6 @@
     export let id = 0
     let container = [0,0]
     setContext("panelWrapperID",id)
-
     function handleResize(event) {
         let local_panel = $panels[id]
         if (!local_panel.isResizing) return;
@@ -49,12 +48,7 @@
         const newSizeSecondary = currentSize[panelBeingResized + 1] - delta / containerSize;
 
         if (newSizePrimary >= minSizePrimary && newSizeSecondary >= minSizeSecondary) {
-            console.log("-------------------------")
-            console.log("NewSizePrimary",newSizePrimary)
-            console.log("minSizePrimary",minSizePrimary)
-            console.log("newSizeSecondary",newSizeSecondary)
-            console.log("minSizeSecondary",minSizeSecondary)
-            console.log(local_panel.startX )
+
             return { newSizePrimary, newSizeSecondary };
         }
 
@@ -70,10 +64,11 @@
     }
 
     class PanelWrapper{
-        constructor(direction = "horizontal", panels=[],id = null){
+        constructor(direction = "horizontal", panels=[],id = null,nested= false){
             this.direction = direction
             this.panels = panels
             this.id = id
+            this.nested = nested
         }
     }
 
@@ -86,6 +81,7 @@
 
     function init(){
         let element = document.querySelector(`[data-panel-wrapper-id="${id}"]`)
+        
         container[0] = element.clientWidth
         container[1] = element.clientHeight
         if(org_width_distribution.length == 0){
@@ -100,12 +96,12 @@
             index += 1
 
         });
-        let panelwrapper = new PanelWrapper(input_direction,list_of_panels,id)
+        let nested = element.parentElement.hasAttribute("data-panel")
+        let panelwrapper = new PanelWrapper(input_direction,list_of_panels,id,nested)
         $panels[id] = panelwrapper
     }
 
     onMount(() => {
-        console.log("mount")
         init()
         document.addEventListener("mouseup", stopResize);
         document.addEventListener("mousemove", handleResize);

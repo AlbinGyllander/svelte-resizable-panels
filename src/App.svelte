@@ -17,7 +17,7 @@
             <p>panel 1</p>
           </ResizablePanel>
           
-          <Handle forPanel={0}></Handle>
+          <Handle withHandle={false} forPanel={0}></Handle>
 
     
           <ResizablePanel minW={0.1} panelID={1}>
@@ -33,7 +33,7 @@
               </Panels>
           </ResizablePanel>
           
-          <Handle withHandle={false} forPanel={1}></Handle>
+          <Handle forPanel={1}></Handle>
 
           <ResizablePanel minW={0.1} panelID={2}>
             <p>panel 2</p>

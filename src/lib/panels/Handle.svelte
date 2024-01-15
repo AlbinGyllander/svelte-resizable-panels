@@ -32,18 +32,18 @@
 </script>
 {#if  loaded == true}
     {#if direction == "horizontal"}
-    <div  class="cursor-col-resize bg-gray-100 h-full absolute z-50 flex justify-center items-center w-0.5"
+    <div  class="cursor-col-resize bg-gray-100 h-full absolute z-50 flex justify-center items-center w-[1px]"
         style="left: {loaded_panel_sizes.slice(0, index).reduce((sum, w) => sum + w, 0) * 100 + loaded_panel_sizes[index] * 100 }%;"
         on:mousedown={(event)=>{startResize(event, index)}}>
         
         {#if withHandle}
-        <div class="p-1 bg-gray-100 rounded-lg">
+        <div class="p-1 mr-0.5 bg-gray-100 rounded-lg">
             <DragHandle />
         </div>
         {/if}
     </div>
     {:else}
-    <div class=" cursor-row-resize bg-gray-100 w-full absolute z-50 flex justify-center items-center h-0.5"
+    <div class=" cursor-row-resize bg-gray-100 w-full absolute z-50 flex justify-center items-center h-[2px]"
         style="top: {loaded_panel_sizes.slice(0, index).reduce((sum, w) => sum + w, 0) * 100 + loaded_panel_sizes[index] * 100 }%;"
         on:mousedown={(event)=>{startResize(event, index)}}>
         {#if withHandle}
